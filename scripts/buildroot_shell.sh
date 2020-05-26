@@ -10,6 +10,9 @@ UID0="$(id -u)"
 GID0="$(id -g)"
 USER0="$(whoami)"
 
+DOCKER_REPO="batocera"
+DOCKER_IMAGE="batocera.linux-build"
+
 # Protect ${platform} value, if buildroot platform config not supported then quit
 if [ -z "${1}" ]; then
     echo "usage: ${0} Platform"
@@ -32,5 +35,5 @@ echo "Entering docker shell...: ${platform}"
 # start docker
 # check docker image available ?
 
-docker run -it --rm -v ${PROJECT_DIR}:/build -v ${DL_DIR}:/build/buildroot/dl -v ${OUTPUT_DIR}/${platform}:/${platform} -w /${platform} -v ${CCACHE_DIR}:/home/${USER0}/.buildroot-ccache -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -u ${UID0}:${GID0} batocera/batocera.linux-build 
+docker run -it --rm -v ${PROJECT_DIR}:/build -v ${DL_DIR}:/build/buildroot/dl -v ${OUTPUT_DIR}/${platform}:/${platform} -w /${platform} -v ${CCACHE_DIR}:/home/${USER0}/.buildroot-ccache -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -u ${UID0}:${GID0} ${DOCKER_REPO}/${DOCKER_IMAGE} 
 

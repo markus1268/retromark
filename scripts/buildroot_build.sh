@@ -5,11 +5,14 @@ OUTPUT_DIR="${PROJECT_DIR}/output"
 CCACHE_DIR="${PROJECT_DIR}/buildroot-ccache"
 BUILDROOT_DIR="${PROJECT_DIR}/buildroot"
 platform=$1
-pkg=$2
+CMD=$2
 
 UID0="$(id -u)"
 GID0="$(id -g)"
 USER0="$(whoami)"
+
+DOCKER_REPO="batocera"
+DOCKER_IMAGE="batocera.linux-build"
 
 # Protect ${platform} value, if buildroot platform config not supported then quit
 if [ -z "${1}" ]; then
@@ -39,5 +42,5 @@ echo "Buildroot building...: ${platform}_defconfig"
 # check docker image available ?
 
 # run docker container
-docker run -it --rm -v ${PROJECT_DIR}:/build -v ${DL_DIR}:/build/buildroot/dl -v ${OUTPUT_DIR}/${platform}:/${platform} -v ${CCACHE_DIR}:/home/${USER0}/.buildroot-ccache -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -u ${UID0}:${GID0} batocera/batocera.linux-build make O=/${platform} -C /build/buildroot
+docker run -it --rm -v ${PROJECT_DIR}:/build -v ${DL_DIR}:/build/buildroot/dl -v ${OUTPUT_DIR}/${platform}:/${platform} -v ${CCACHE_DIR}:/home/${USER0}/.buildroot-ccache -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -u ${UID0}:${GID0} ${DOCKER_REPO}/${DOCKER_IMAGE} make O=/${platform} -C /build/buildroot ${CMD}
 
