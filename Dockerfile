@@ -1,38 +1,61 @@
+# This Dockerfile generates the docker image that gets used for building buildroot
+# To build it (YYYYMMDD.HHMM is the current date and time in UTC):
+#   sudo docker build -t markus1268/buildroot:YYYYMMDD.HHMM .
+#   sudo docker push markus1268/buildroot:YYYYMMDD.HHMM
 FROM ubuntu:18.04
 
 RUN dpkg --add-architecture i386 && \
-	apt update && \
-	apt install -y libc6:i386 \
+	apt-get update -y && \
+	apt-get install -y --no-install-recommends \
+        bc \
+        build-essential \
+        bzr \
+        ca-certificates \
+        cmake \
+        cpio \
+        cvs \
+        file \
+        g++-multilib \
+        git \
+        libc6:i386 \
+        libncurses5-dev \
+        locales \
+        mercurial \
+        python-flake8 \
+        python-nose2 \
+        python-pexpect \
+        python3 \
+        python3-nose2 \
+        python3-pexpect \
+        qemu-system-arm \
+        qemu-system-x86 \
+        rsync \
+        subversion \
+        unzip \
+        wget \
 		libncurses5:i386 \
 		libstdc++6:i386 \
-		build-essential \
-		git \
-		libncurses5-dev \
 		libssl-dev \
-		mercurial \
 		texinfo \
 		zip \
 		default-jre \
 		imagemagick \
-		subversion \
 		autoconf \
 		automake \
 		bison \
 		scons \
 		libglib2.0-dev \
-		bc \
 		mtools \
 		u-boot-tools \
 		flex \
-		wget \
-		cpio \
 		dosfstools \
 		libtool \
-		rsync \
 		device-tree-compiler \
 		gettext \
-		locales \
-	&& apt clean
+        && \
+    apt-get -y autoremove && \
+    apt-get -y clean
+		
 
 # Set locale
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
