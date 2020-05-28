@@ -11,8 +11,10 @@ UID0="$(id -u)"
 GID0="$(id -g)"
 USER0="$(whoami)"
 
-DOCKER_REPO="batocera"
-DOCKER_IMAGE="batocera.linux-build"
+#DOCKER_REPO="batocera"
+#DOCKER_IMAGE="batocera.linux-build"
+DOCKER_REPO="markus1268"
+IMAGE_NAME="retromark-buildroot"
 
 # Protect ${platform} value, if buildroot platform config not supported then quit
 if [ -z "${1}" ]; then

@@ -1,7 +1,7 @@
 # This Dockerfile generates the docker image that gets used for building buildroot
 # To build it (YYYYMMDD.HHMM is the current date and time in UTC):
-#   sudo docker build -t markus1268/buildroot:YYYYMMDD.HHMM .
-#   sudo docker push markus1268/buildroot:YYYYMMDD.HHMM
+#   sudo docker build -t markus1268/retromark-buildroot:YYYYMMDD.HHMM .
+#   sudo docker push markus1268/retromark-buildroot:YYYYMMDD.HHMM
 FROM ubuntu:18.04
 
 RUN dpkg --add-architecture i386 && \
