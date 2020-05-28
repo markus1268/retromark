@@ -3,7 +3,7 @@
 DOCKER_REPO="markus1268"
 DOCKER_IMAGE="retromark-buildroot"
 
-#check retromark image available ?
+#check markus1268/retromark-buildroot image available ?
 
-#build docker image
+#publish docker image to docker hub
 docker push ${DOCKER_REPO}/${DOCKER_IMAGE}:latest

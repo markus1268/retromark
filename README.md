@@ -1,9 +1,44 @@
 # Retromark
 
 **Linux entertainment tv box**, [ Kodi media player, Retro gaming and Browser ]
+- Arch  : arm
+- Board : Raspberry pi 3, Raspberrypi 4, Amlogic S905
+- Build system : Buildroot
+---
+**Building Retromark**
 
-Arch  : arm
+Configure and build buildroot
+```bash
+$ cd retromark_path
+$ ./scripts/buildroot_config.sh raspberrypi4_64
+$ ./scripts/buildroot_build.sh raspberrypi4_64
+```
+Clean
+```bash
+$ ./scripts/buildroot_clean.sh raspberrypi4_64
+```
+Docker shell
+```bash
+$ ./scripts/buildroot_shell.sh raspberrypi4_64
+```
+---
+**Docker Image**
 
-Board : Raspberry pi 3, Raspberrypi 4, Amlogic S905
+Build docker image
+```bash
+$ cd retromark_path
+$ ./scripts/docker_build_retromark_image.sh
+```
 
-Build system : Buildroot
+Publish docker image to docker hub
+```bash
+$ cd retromark_path
+$ docker login
+$ ./scripts/docker_publish_retromark_image.sh
+```
+
+Get docker image from docker hub
+```bash
+$ cd retromark_path
+$ ./scripts/docker_pull_retromark_image.sh
+```
