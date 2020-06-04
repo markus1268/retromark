@@ -4,6 +4,7 @@ DL_DIR="${PROJECT_DIR}/dl"
 OUTPUT_DIR="${PROJECT_DIR}/output"
 CCACHE_DIR="${PROJECT_DIR}/buildroot-ccache"
 BUILDROOT_DIR="${PROJECT_DIR}/buildroot"
+CONFIGS_DIR="${PROJECT_DIR}/configs"
 platform=$1
 
 UID0="$(id -u)"
@@ -21,14 +22,14 @@ if [ -z "${1}" ]; then
     exit 1
 fi
 
-if [ ! -f "${BUILDROOT_DIR}/configs/${platform}_defconfig" ]; then
-    echo "Platform ${platform}_defconfig not found"
+if [ ! -f "${CONFIGS_DIR}/retromark-${platform}_defconfig" ]; then
+    echo "Platform retromark-${platform}_defconfig not found"
     exit 1
 fi
 
 # check buildroot configuration already done
 if [ ! -d "${OUTPUT_DIR}/${platform}/build" ]; then
-    echo "Pls. make builroot configuration for ${platform}_defconfig: buildroot_config.sh ${platform}"
+    echo "Pls. make builroot configuration for retromark-${platform}_defconfig: buildroot_config.sh ${platform}"
     exit 1
 fi
 

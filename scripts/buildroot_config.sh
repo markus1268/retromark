@@ -4,6 +4,7 @@ DL_DIR="${PROJECT_DIR}/dl"
 OUTPUT_DIR="${PROJECT_DIR}/output"
 CCACHE_DIR="${PROJECT_DIR}/buildroot-ccache"
 BUILDROOT_DIR="${PROJECT_DIR}/buildroot"
+CONFIGS_DIR="${PROJECT_DIR}/configs"
 platform=$1
 
 UID0="$(id -u)"
@@ -21,7 +22,7 @@ if [ -z "${1}" ]; then
     exit 1
 fi
 
-if [ ! -f "${BUILDROOT_DIR}/configs/${platform}_defconfig" ]; then
+if [ ! -f "${CONFIGS_DIR}/retromark-${platform}_defconfig" ]; then
     echo "Platform ${platform}_defconfig not found"
     exit 1
 fi
@@ -36,11 +37,11 @@ if [ ! -d "${DL_DIR}" ]; then
     mkdir -p ${DL_DIR}
 fi
 
-echo "Buildroot configuring...: ${platform}_defconfig"
+echo "Buildroot configuring...: retromark-${platform}_defconfig"
 
 # start docker
 # check docker image available ?
 
 # run docker container
-docker run -it --init --rm -v ${PROJECT_DIR}:/build -v ${DL_DIR}:/build/buildroot/dl -v ${OUTPUT_DIR}/${platform}:/${platform} -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -u ${UID0}:${GID0} ${DOCKER_REPO}/${DOCKER_IMAGE} make O=/${platform} -C /build/buildroot ${platform}_defconfig
+docker run -it --init --rm -v ${PROJECT_DIR}:/build -v ${DL_DIR}:/build/buildroot/dl -v ${OUTPUT_DIR}/${platform}:/${platform} -v /etc/passwd:/etc/passwd:ro -v /etc/group:/etc/group:ro -u ${UID0}:${GID0} ${DOCKER_REPO}/${DOCKER_IMAGE} make O=/${platform} BR2_EXTERNAL=/build -C /build/buildroot retromark-${platform}_defconfig
 
