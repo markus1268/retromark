@@ -42,3 +42,14 @@ Get docker image from docker hub
 $ cd retromark_path
 $ ./scripts/docker_pull_retromark_image.sh
 ```
+---
+**Todo:**
+- [x] Buildroot submodule
+- [x] Docker and build tool scripts
+- [x] BR2_EXTERNAL
+- [ ] RPI4 platform support
+- [ ] S905 platform support
+- [ ] OdroidC2 platform support
+- [ ] Kodi
+- [ ] RetroArch
+- [ ] Web Browser
