@@ -56,6 +56,8 @@ RUN dpkg --add-architecture i386 && \
 		libtool \
 		device-tree-compiler \
 		gettext \
+        lzop \
+        vim \
         && \
     apt-get -y autoremove && \
     apt-get -y clean
